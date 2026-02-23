@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-torch
-torchvision
+onnxruntime
+numpy
 pillow
 python-multipart
