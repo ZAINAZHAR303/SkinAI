@@ -5,14 +5,14 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 from PIL import Image
 
-# 📥 Auto-download model from Hugging Face if not present locally
+
 MODEL_PATH = "convolutional_network.pth"
 MODEL_URL  = "https://huggingface.co/zainazhar303/skin-disease-cnn/resolve/main/convolutional_network.pth"
 
 if not os.path.exists(MODEL_PATH):
     print(f"Model not found locally. Downloading from Hugging Face...")
     urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
-    print("✅ Model downloaded successfully.")
+    print(" Model downloaded successfully.")
 
 # Architecture reconstructed from convolutional_network.pth weight shapes:
 # conv1: Conv2d(3, 16, 3) | conv2: Conv2d(16, 32, 3)
@@ -36,7 +36,7 @@ class SkinDiseaseCNN(nn.Module):
         x = self.relu(self.fc2(x))
         return self.fc3(x)
 
-# 🔥 Load model once (FAST)
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = SkinDiseaseCNN(num_classes=9)
@@ -44,7 +44,7 @@ model.load_state_dict(torch.load("convolutional_network.pth", map_location=devic
 model.to(device)
 model.eval()
 
-# 🧪 transforms (match training!)
+
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -54,7 +54,7 @@ transform = transforms.Compose([
     )
 ])
 
-# 🧠 9 classes — ISIC 2019 dataset
+
 CLASS_NAMES = [
     "Melanoma",
     "Melanocytic Nevus",
