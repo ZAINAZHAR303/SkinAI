@@ -33,7 +33,7 @@ export default function Home() {
 
       let res;
       try {
-        res = await fetch("http://localhost:8000/predict", {
+        res = await fetch("https://skinai-4agc.onrender.com/predict", {
           method: "POST",
           body: formData,
         });
